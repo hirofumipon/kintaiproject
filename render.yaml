@@ -1,10 +1,14 @@
 databases:
   - name: kintai
+    plan: free
+    region: singapore
     databaseName: kintai
     user: kintai
 
 services:
   - type: web
+    plan: free
+    region: singapore
     name: kintai
     runtime: python
     buildCommand: "./build.sh"
