@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load humanize %}
 {% block content %}
 <main>
   <div class="container-fluid px-4">
@@ -33,6 +33,9 @@
               <th>超過給料</th>
               <th>残業警告</th>
               <th>欠勤理由</th>
+              <th>詳細</th>
+              <th>編集</th>
+              <th>削除</th>
             </tr>
           </thead>
           <tfoot>
@@ -48,6 +51,9 @@
               <th>超過給料</th>
               <th>残業警告</th>
               <th>欠勤理由</th>
+              <th>詳細</th>
+              <th>編集</th>
+              <th>削除</th>
             </tr>
           </tfoot>
           <tbody>
@@ -60,9 +66,9 @@
               <td>{{ item.checkin }}</td>
               <td>{{ item.checkout }}</td>
               <td>{{ item.overtime }}</td>
-              <td>{{ item.hourlypaycheck }}</td>
-              <td>{{ item.overpaycheck }}</td>
-              <td>{{ item.overtimealert }}</td>
+              <td>{{ item.hourlypaycheck|intcomma }}</td>
+              <td>{{ item.overpaycheck|intcomma }}</td>
+              <td style="color: red">{{ item.overtimealert }}</td>
               <td>{{ item.reasonforabsense }}</td>
               <td><a href="{% url 'detail' item.pk %}" class="btn btn btn-secondary" tabindex="-1" role="button" aria-disabled="true">詳細</a></td>
               <td><a href="{% url 'update' item.pk %}" class="btn btn-info" tabindex="-1" role="button" aria-disabled="true">編集</a></td>

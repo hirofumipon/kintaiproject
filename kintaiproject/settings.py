@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'django_bootstrap5',
     'allauth.socialaccount',
+    'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [
@@ -182,3 +183,5 @@ DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')'''
 LOGIN_URL = '/account/login/' # ログインURLの設定
 
 ACCOUNT_SESSION_REMEMBER = True
+
+NUMBER_GROUPING = 3

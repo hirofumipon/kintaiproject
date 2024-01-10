@@ -77,9 +77,12 @@ class KintaiModel(models.Model):
   """
   @property
   def overpaycheck(self):
-    overtime = (self.checkout - self.checkin - datetime.timedelta(hours=9)).seconds
-    overpaycheck = overtime/60/60*self.hourlypaycheck
-    return int(overpaycheck)
+    if (self.checkout - self.checkin) >= datetime.timedelta(hours=9):
+      overtime = (self.checkout - self.checkin - datetime.timedelta(hours=9)).seconds
+      overpaycheck = overtime/60/60*self.hourlypaycheck
+      return int(overpaycheck)
+    else:
+      return 0
   """
   overtimealert = models.CharField(
     verbose_name = '残業警告',
@@ -93,7 +96,7 @@ class KintaiModel(models.Model):
   def overtimealert(self):
     overtime = (self.checkout - self.checkin - datetime.timedelta(hours=9)).seconds
     overtimetarget = (Overtimetarget.objects.last().name.hour * 60 + Overtimetarget.objects.last().name.minute) * 60
-    if overtime >= overtimetarget:
+    if (self.checkout - self.checkin) >= datetime.timedelta(hours=9) and overtime >= overtimetarget:
       return '残業注意'
     else:
       return ''

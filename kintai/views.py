@@ -12,19 +12,19 @@ def topfunc(request):
   return render(request, 'top.html')
 
 def kintaitopfunc(request):
-  kintaidata = KintaiModel.objects.all()
+  kintaidata = KintaiModel.objects.all().order_by('-checkin','-checkout')
   overtimetarget = Overtimetarget.objects.last()
   return render(request, 'kintaiapp/index.html', {'kintaidata':kintaidata, 'overtimetarget':overtimetarget})
 
 
 def allmanagementfunc(request):
-  kintaidata = KintaiModel.objects.all()
+  kintaidata = KintaiModel.objects.all().order_by('-checkin','-checkout')
   overtimetarget = Overtimetarget.objects.last()
   return render(request, 'kintaiapp/allmanagement.html', {'kintaidata':kintaidata, 'overtimetarget':overtimetarget})
 
 def overtimefunc(request):
   overtimetarget = Overtimetarget.objects.last()
-  filtered_data = KintaiModel.objects.filter(overtime__gte = overtimetarget.name)
+  filtered_data = KintaiModel.objects.filter(overtime__gte = overtimetarget.name).order_by('-checkin','-checkout')
   """
   for item in filtered_data:
     if item.overtime > overtimetarget.name:
