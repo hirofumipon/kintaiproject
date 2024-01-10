@@ -24,7 +24,7 @@ def allmanagementfunc(request):
 
 def overtimefunc(request):
   overtimetarget = Overtimetarget.objects.last()
-  filtered_data = KintaiModel.objects.filter(overtime__gt = overtimetarget.name)
+  filtered_data = KintaiModel.objects.filter(overtime__gte = overtimetarget.name)
   """
   for item in filtered_data:
     if item.overtime > overtimetarget.name:
