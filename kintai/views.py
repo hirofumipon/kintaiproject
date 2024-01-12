@@ -46,6 +46,7 @@ def detailcostfunc(request):
 class KintaiList(ListView):
   template_name = 'kintaiapp/edit.html'
   model = KintaiModel
+  ordering = ('-checkin', '-checkout')
 
 class KintaiDetail(DetailView):
   template_name = 'kintaiapp/detail.html'
