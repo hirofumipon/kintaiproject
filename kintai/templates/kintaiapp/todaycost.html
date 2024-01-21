@@ -3,9 +3,9 @@
 {% block content %}
 <main>
   <div class="container-fluid px-4">
-    <h1 class="mt-4">今日の人件費</h1>
+    <h1 class="mt-4">今日までの人件費</h1>
     <ol class="breadcrumb mb-4">
-      <li class="breadcrumb-item active">今日の予算と現在の人件費</li>
+      <li class="breadcrumb-item active">予算と現在の人件費</li>
     </ol>
     <div class="m-2">
       <a href="{% url 'kintaitop' %}" class="btn btn-link" tabindex="-1" role="button" aria-disabled="true">トップに戻る</a>
@@ -16,9 +16,11 @@
     <div class="card mb-4">
       <div class="card-header">
         <i class="fas fa-chart-bar me-1"></i>
-        予算との差額
+        予算と実績の差額
       </div>
       <div class="card-body">
+        <p>予算 - 超過給料分 = 結果</p>
+        <p>{{ budget.name }} - {{ total_overpaycheck }} = {{ result }}</p>
       </div>
     </div>
   </div>

@@ -37,7 +37,22 @@ def overtimefunc(request):
 
 
 def todaycostfunc(request):
-  return render(request, 'kintaiapp/todaycost.html')
+  kintai_all_data = KintaiModel.objects.all()
+  '''
+  kintai_all_data = KintaiModel.objects.filter(
+    checkin__year = datetime.date.today().year,
+    checkin__month = datetime.date.today().month,
+    checkin__day = datetime.date.today().day,
+  )
+  '''
+  budget = Budget.objects.first()
+
+  total_overpaycheck = 0
+  #total_overtime = 0
+  for kintai_data in kintai_all_data:
+    total_overpaycheck += kintai_data.overpaycheck
+    #total_overtime += kintai_data.overtime
+  return render(request, 'kintaiapp/todaycost.html', {'total_overpaycheck' : total_overpaycheck, 'budget' : budget, 'result' : budget.name - total_overpaycheck})
 
 def detailcostfunc(request):
   return render(request, 'kintaiapp/detailcost.html')
