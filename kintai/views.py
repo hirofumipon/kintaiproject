@@ -48,11 +48,12 @@ def todaycostfunc(request):
   budget = Budget.objects.first()
 
   total_overpaycheck = 0
-  #total_overtime = 0
+  total_overtime = 0
   for kintai_data in kintai_all_data:
     total_overpaycheck += kintai_data.overpaycheck
-    #total_overtime += kintai_data.overtime
-  return render(request, 'kintaiapp/todaycost.html', {'total_overpaycheck' : total_overpaycheck, 'budget' : budget, 'result' : budget.name - total_overpaycheck})
+    total_overtime += kintai_data.overtime.hour*60 + kintai_data.overtime.minute #時間単位を分で集計
+  total_overtime = total_overtime/60 #時間を分から時に変換
+  return render(request, 'kintaiapp/todaycost.html', {'total_overpaycheck' : total_overpaycheck, 'total_overtime' : total_overtime, 'budget' : budget, 'result' : budget.name - total_overpaycheck})
 
 def detailcostfunc(request):
   return render(request, 'kintaiapp/detailcost.html')

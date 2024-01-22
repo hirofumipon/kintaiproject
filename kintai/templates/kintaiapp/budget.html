@@ -5,7 +5,7 @@
   <div class="container-fluid px-4">
     <h1 class="mt-4">予算人件費設定</h1>
     <ol class="breadcrumb mb-4">
-      <li class="breadcrumb-item active">今日の人件費予算(残業超過分)</li>
+      <li class="breadcrumb-item active">人件費予算(残業超過分)</li>
     </ol>
     <div class="m-2">
       <a href="{% url 'kintaitop' %}" class="btn btn-link" tabindex="-1" role="button" aria-disabled="true">トップに戻る</a>
@@ -16,7 +16,7 @@
         超過人件費予算分を設定する
       </div>
       <div class="card-body">
-        <h3>今日の人件費予算(残業超過分):
+        <h3>人件費予算(残業超過分):
           {% for item in object_list %}
           {{ item.name }}</h3>
         <a href="{% url 'budgetupdate' item.pk %}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">予算設定</a>
